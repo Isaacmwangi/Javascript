@@ -106,28 +106,31 @@ function analyzeData(users) {
   //this will help to calculates the timestamp that was exactly one week ago from the current timestamp
 
   // Filter active users who have posted in the past week
-  const activeUsers = users.filter(user =>
-    user.posts.some(post => new Date(post.timestamp) > pastWeekDate)
+  const activeUsers = users.filter((user) =>
+    user.posts.some((post) => new Date(post.timestamp) > pastWeekDate)
   );
 
-  // Step 2: Extract Popular Posts from Active Users
-  const popularPosts = activeUsers
-    .flatMap(user => user.posts.filter(post => post.likes >= 10));
+  // now let`s extract Popular Posts from Active Users
+  const popularPosts = activeUsers.flatMap((user) =>
+    user.posts.filter((post) => post.likes >= 10)
+  );
 
-  // Step 3: Calculate Average Likes per User
+  // next we calculate Average Likes per User
   const totalLikes = popularPosts.reduce((acc, post) => acc + post.likes, 0);
   const averageLikesPerUser = totalLikes / activeUsers.length;
 
-  // Bonus: Prepare Additional Data
+  // for the Bonus, lets prepare Additional Data
   const result = {
     activeUsersCount: activeUsers.length,
     popularPostsCount: popularPosts.length,
-    averageLikesPerUser: averageLikesPerUser.toFixed(2) // Limit to 2 decimal places
+    averageLikesPerUser: averageLikesPerUser.toFixed(2), // Limit to 2 decimal places
   };
 
   return result;
 }
 
-// Usage
-const analysisResult = analyzeData(users);
-console.log(analysisResult);
+const analysisResult = analyzeData(users); //calling the funtion after initializing it to new variable
+
+console.log(`activeUsersCount: ${analysisResult.activeUsersCount}`);
+console.log(`popularPostsCount: ${analysisResult.popularPostsCount}`);
+console.log(`averageLikesPerUser: ${analysisResult.averageLikesPerUser}`);
