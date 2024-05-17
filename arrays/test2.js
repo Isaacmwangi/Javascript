@@ -111,9 +111,9 @@ function analyzeData(users) {
   );
 
   // now let`s extract Popular Posts from Active Users
-  const popularPosts = activeUsers.flatMap((user) =>
-    user.posts.filter((post) => post.likes >= 10)
-  );
+  const popularPosts = activeUsers.map(user => user.posts.filter(post => post.likes >= 10))
+  .flat();
+
 
   // next we calculate Average Likes per User
   const totalLikes = popularPosts.reduce((acc, post) => acc + post.likes, 0);
