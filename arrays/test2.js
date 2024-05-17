@@ -53,36 +53,36 @@ const users = [
   ];
  
 
-
-  //map Active Users
- 
-  userPosts = users.map((user)=>user.posts)
-
-
-   const getSocialMediaStats = (users) => {
-    const oneWeekAgo = new Date();
-    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+  function analyzeData(users) {
+    const currentDate = new Date(); // Get current date/time
   
-    // Step 1: Filter Active Users
-    const activeUsers = users.filter(user => 
-      user.posts.some(post => new Date(post.timestamp) > oneWeekAgo)
+    // Filter active users who posted in the past week
+    const activeUsers = users.filter(user =>
+      user.posts.some(post => {
+        const postDate = new Date(post.timestamp);
+        const timeDifference = currentDate.getTime() - postDate.getTime();
+        const daysDifference = timeDifference / (1000 * 3600 * 24); // Convert milliseconds to days
+        return daysDifference <= 7; // Posts within the last 7 days
+      })
     );
   
-    // Step 2: Extract Popular Posts
-    const popularPosts = activeUsers.map(user => 
-      user.posts.filter(post => post.likes >= 10 && new Date(post.timestamp) > oneWeekAgo)
-    ).flat();
+    // Extract popular posts (posts with >= 10 likes) from active users
+    const popularPosts = activeUsers.flatMap(user =>
+      user.posts.filter(post => post.likes >= 10)
+    );
   
-    // Step 3: Calculate Average Likes per User
-    const totalLikes = popularPosts.reduce((acc, post) => acc + post.likes, 0);
-    const averageLikesPerUser = popularPosts.length > 0 ? totalLikes / activeUsers.length : 0;
+    // Calculate average likes per active user across all their popular posts
+    const totalLikes = popularPosts.reduce((sum, post) => sum + post.likes, 0);
+    const averageLikesPerUser = totalLikes / activeUsers.length;
   
-    // Step 4: Return Extended Information
+    // Bonus: Return an object containing analysis results
     return {
-      activeUsersCount: activeUsers.length,
+      activeUsers: activeUsers.length,
       totalPopularPosts: popularPosts.length,
-      averageLikesPerUser
+      averageLikesPerUser: averageLikesPerUser.toFixed(2) // Rounded to 2 decimal places
     };
-  };
+  }
   
-   console.log(getSocialMediaStats(users));
+  const analysisResults = analyzeData(users);
+  console.log(analysisResults);
+  
