@@ -131,7 +131,8 @@ data.map((product) => {
   descriptionContainer.style.borderColor = 'black';
   descriptionContainer.style.borderWidth = '3px';
   descriptionContainer.style.borderStyle = 'solid';
-  descriptionContainer.style.padding = '5px';
+  descriptionContainer.style.padding = '3px';
+  descriptionContainer.style.textAlign = 'center';
 
 
   //article
@@ -147,6 +148,7 @@ data.map((product) => {
   listContainer.style.borderColor = 'black';
   listContainer.style.width = '100%';
   listContainer.style.listStyleType = 'none';
+  listContainer.style.paddingBottom = '20px';
 
   // Title
   const title = document.createElement('p');
@@ -171,13 +173,18 @@ data.map((product) => {
   price.textContent = `ksh ${product.price}`;
   listContainer.appendChild(price);
 
-  const button = document.createElement('btn');
-  button.textContent = "Buy Now";
-  listContainer.appendChild(button);
-  button.style.backgroundColor='blue'
-  button.style.color='white'
-  button.style.bottom='0'
-  button.style.margin='30%'
-  button.style.padding='5px'
+
+  //button
+  const buttom = document.createElement('div');
+  descriptionContainer.appendChild(buttom);
+  
+  const btn = document.createElement('btn');
+  btn.textContent = "Buy Now";
+  buttom.appendChild(btn);
+  btn.style.backgroundColor = 'blue';
+  btn.style.color = 'white';
+  btn.style.margin = '30%';
+  btn.style.padding = '5px';
+  btn.style.alignSelf = 'center';
   
 });
