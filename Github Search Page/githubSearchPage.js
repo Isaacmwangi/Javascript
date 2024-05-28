@@ -1,4 +1,4 @@
-const token = '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';
+const token = '';//token should be between the quotes but I have omited it for privacy
 
 const fetchData = async () => {
     const username = document.getElementById('username').value;
@@ -60,14 +60,13 @@ const displayInfo = (data) => {
     location.textContent = `Location: ${data.location}`;
     userInfoDiv.appendChild(location);
 
-        //display repos
+        //display public repos
 
     const publicRepos = document.createElement('p');
     publicRepos.textContent = `Public Repos: ${data.public_repos}`;
     userInfoDiv.appendChild(publicRepos);
 
-
-        //display followers
+         //display followers
 
     const followers = document.createElement('p');
     followers.textContent = `Followers: ${data.followers}`;
@@ -87,3 +86,4 @@ document.getElementById('username').addEventListener('keypress', (event) => {
         fetchData();
     }
 });
+
