@@ -33,34 +33,48 @@ const displayInfo = (data) => {
     //display user image (profile picture)
     const avatar = document.createElement('img');
     avatar.src = data.avatar_url;
-    avatar.alt = `${data.login}'s avatar`;
     avatar.width = 100;
     userInfoDiv.appendChild(avatar);
 
-
+    //display username
     const username = document.createElement('p');
     username.textContent = `Username: ${data.login}`;
     userInfoDiv.appendChild(username);
+
+        //display Name
 
     const name = document.createElement('p');
     name.textContent = `Name: ${data.name}`;
     userInfoDiv.appendChild(name);
 
+        //display bio
+
     const bio = document.createElement('p');
     bio.textContent = `Bio: ${data.bio}`;
     userInfoDiv.appendChild(bio);
+
+
+        //display location
 
     const location = document.createElement('p');
     location.textContent = `Location: ${data.location}`;
     userInfoDiv.appendChild(location);
 
+        //display repos
+
     const publicRepos = document.createElement('p');
     publicRepos.textContent = `Public Repos: ${data.public_repos}`;
     userInfoDiv.appendChild(publicRepos);
 
+
+        //display followers
+
     const followers = document.createElement('p');
     followers.textContent = `Followers: ${data.followers}`;
     userInfoDiv.appendChild(followers);
+
+
+        //display following
 
     const following = document.createElement('p');
     following.textContent = `Following: ${data.following}`;
